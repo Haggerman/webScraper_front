@@ -31,6 +31,12 @@ background-color: none;
   width: 600px !important;
   padding-bottom: 10px !important;
 }
+.css-uhb5lp{
+  width: 600px !important;
+  padding-bottom: 10px !important;
+}
+
+
 .dialogTitle {
   display: flex;
   justify-content: space-between;
@@ -62,6 +68,7 @@ background-color: none;
 }
 .css-10cuv6x {
   background-color: #525864 !important;
+  color: white !important;
 }
 body{
   background-color: black;
