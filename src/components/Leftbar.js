@@ -215,10 +215,7 @@ const Leftbar = ({handleUpdate, handleUpdateURLList, patterns}) => {
                 </form>
 
                 <URLList URLs={listURLs} handleDelete={handleDelete} handlePickUrl={handlePickUrl} pickedURL={pickedUrl} />
-            </CardContent>     
-            <a href="#" onClick={handleClick}>
-      Click me
-    </a>   
+            </CardContent>      
         </Card>
     )
 };
