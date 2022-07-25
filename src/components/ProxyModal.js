@@ -1,15 +1,14 @@
 import * as React from 'react';
-import {Grid, Typography, Box, Button, Icon } from "@mui/material";
+import {Grid} from "@mui/material";
 import TextField from '@mui/material/TextField';
 import Dialog from '@mui/material/Dialog';
-import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import AddBoxIcon from '@mui/icons-material/AddBox';
 import SendIcon from '@mui/icons-material/Send';
 import VpnKeyIcon from '@mui/icons-material/VpnKey';
 import DialogTitle from '@mui/material/DialogTitle';
 import IconButton from '@mui/material/IconButton';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import ProxyList from './ProxyList';
 import {styled } from '@mui/material/styles';
 

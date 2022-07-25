@@ -1,13 +1,10 @@
 
 import React  from 'react';
-import { AppBar, Toolbar, Typography, Box, Grid, Paper } from "@mui/material";
+import { Grid} from "@mui/material";
 import { useState, useEffect } from 'react';
-import styled from "@emotion/styled";
 import Results from "./Results";
 import Patterns from "./Patterns";
 import Structure from "./Structure";
-
-
 
 const Main = ({HTMLresponse, listURLs, handleSetPatterns}) => {
   const [results, setResults] = useState("");
@@ -78,8 +75,6 @@ const Main = ({HTMLresponse, listURLs, handleSetPatterns}) => {
         return res.json();
       })
       .then(data => {
-        console.log("VYSLEDKY PO PRIDANI NOVE URL")
-        console.log(data)
         handleUpdate(data);
       })
       .catch(err => {

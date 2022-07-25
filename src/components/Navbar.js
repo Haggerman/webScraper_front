@@ -1,14 +1,16 @@
 import React  from 'react';
 import { AppBar, Button, Toolbar, Typography } from "@mui/material";
+import HelperModal from './HelperModal';
 
 
 const Navbar = () => {
     return (
     <AppBar position="static">
-            <Toolbar className='navBar'>
-                <Typography variant="h6" sx={{display:{sm:"block"}}}>
+            <Toolbar className='navBar' sx={{justifyContent: "space-between"}}>
+                <Typography variant="h6">
                     WebScraper
                 </Typography>
+                <HelperModal />
             </Toolbar>
     </AppBar>
     )

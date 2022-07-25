@@ -53,7 +53,7 @@ const Results = ({results, jsonResults, error}) => {
 
     return (
             <Card elevation={3}>
-                <CardHeader title="Results" 
+                <CardHeader title="Výsledky" 
                 action={!error && results &&
                 <CssButton className='download' {...csvReport}><CSVLink className='download' {...csvReport}><DownloadIcon/></CSVLink></CssButton>
                  } />

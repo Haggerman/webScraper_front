@@ -80,7 +80,7 @@ const Structure = ({HTMLresponse}) => {
     return (
         <Card elevation={3}>
             <CardHeader
-             title="Structure"
+             title="Struktura webu"
  //            action={<Button type="submit" onClick={() => handleSelect()} startIcon={<SearchIcon/>}></Button>}
                action={<ProxyModal/>}
              />

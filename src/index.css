@@ -81,3 +81,16 @@ body{
 .cm-selected{
   background-color: red;
 }
+
+.codeCSS{
+  display: block;
+  font-family: 'Courier New', Courier, monospace !important;
+  font-size: 14px !important;
+
+  text-align: center;
+}
+.nadpis{
+  color:black !important;
+  font-weight: 500 !important;
+
+}

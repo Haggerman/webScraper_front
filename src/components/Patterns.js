@@ -54,7 +54,7 @@ const Patterns = ({handleSubmit,handleSetPattern}) => {
     return (
         <Card elevation={3}>
             <CardHeader 
-            title="Patterns"
+            title="Vyhledávácí vzory"
             action={<CssButton type="submit" onClick={() => handleSubmit(pattern)} ><SendIcon/></CssButton>}
             />
             <Divider/>

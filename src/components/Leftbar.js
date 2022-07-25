@@ -1,5 +1,5 @@
 import React  from 'react';
-import {Grid, Button, Card, CardHeader, CardContent, Divider, TextField } from "@mui/material";
+import {Grid, Card, CardHeader, CardContent, Divider, TextField } from "@mui/material";
 import SendIcon from '@mui/icons-material/Send';
 import { useState, useEffect } from "react";
 import URLList from "./URLList";
@@ -168,28 +168,11 @@ const Leftbar = ({handleUpdate, handleUpdateURLList, patterns}) => {
           setPickedUrl(id)
           handleUpdate(reducedHtmlList)
         }
-
-        const handleClick = (e) => {
-            e.preventDefault();
-            fetch("/sessionClear", {
-                credentials: 'include',
-                headers: {
-                  'Content-Type': 'application/json',
-                },
-              })
-              .then(res => {
-              })
-              .then(data => {
-              })
-              .catch(err => {
-        
-              })
-            }
     
     return (
         <Card elevation={3}>
             <CardHeader 
-            title="URLs"
+            title="URL adresy"
             action={ patterns && <URLModal/>}
             />
             <Divider/>
