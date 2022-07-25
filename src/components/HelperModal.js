@@ -70,7 +70,7 @@ export default function HelperModal() {
             <Typography variant='h7' className='nadpis'>Vyhledávací vzory</Typography>
             <Typography variant='body2' gutterBottom>
             Vyhledávací vzory, dále už jen patterny, slouží k vybírání prvků webové stránky. 
-            Prvky se vybírají předevšík pomocí CSS selektoru. Pro jejich získání je vhoné používat panel pro vývojáře,
+            Prvky se vybírají předevšík pomocí CSS selektoru. Pro jejich získání je vhodné používat panel pro vývojáře,
             který je součástí většiny moderních prohlížečů. Pro tyto účely je doporučeno používat prohlížeč Chrome.
             </Typography>
 
@@ -96,7 +96,7 @@ export default function HelperModal() {
             </Typography>
             <Typography variant='h7' className='nadpis'>Typy exktrakce</Typography>
             <Typography variant='body2' gutterBottom>
-            Nástroj umožňuje zpřistupovat k elementům webové stránky několika způsoby. 
+            Nástroj umožňuje přistupovat k elementům webové stránky několika způsoby. 
             Ten nejzákladnější slouží k získávání celého elementu, včetně jeho tagů, atributů a textu.
             Dále je možné extrahovat jen vnitřní text elementu. K tomu slouží následující řetězec: 
             <strong>">>> text"</strong>, použitý takto: 
