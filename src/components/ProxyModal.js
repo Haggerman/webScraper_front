@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {Grid} from "@mui/material";
+import {Grid, Tooltip} from "@mui/material";
 import TextField from '@mui/material/TextField';
 import Dialog from '@mui/material/Dialog';
 import DialogContent from '@mui/material/DialogContent';
@@ -121,9 +121,11 @@ export default function FormDialog() {
 
   return (
     <div>
+      <Tooltip title = "Přidání proxy adres">
       <CssButton variant="outlined" onClick={handleClickOpen}  >
         <VpnKeyIcon/>
       </CssButton>
+      </Tooltip>
       <Dialog open={open} onClose={handleClose} className='myDialog'>
         <DialogTitle className='dialogTitle'> Proxy list
         {proxyList && proxyList.length > 0 &&  <DialogButton type="submit" className='dialogButton' onClick={() => handleSubmit()} ><SendIcon/></DialogButton> }

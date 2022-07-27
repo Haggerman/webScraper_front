@@ -9,6 +9,7 @@ import { useState } from 'react';
 import CsvUpload from './CsvUpload';
 import {styled } from '@mui/material/styles';
 import IconButton from '@mui/material/IconButton';
+import { Tooltip } from '@mui/material';
 
 
 
@@ -117,9 +118,11 @@ export default function URLModal() {
 
   return (
     <div>
+      <Tooltip title="Hromadná extrakce">
       <CssButton variant="outlined" onClick={handleClickOpen}>
         <UploadFileIcon/>
       </CssButton>
+      </Tooltip>
       <Dialog open={open} onClose={handleClose} className='myDialog'>
         <DialogTitle className='dialogTitle'> URL list
         {mail && file &&  <DialogButton type="submit" className='dialogButton' onClick={() => handleSubmit()}><SendIcon/></DialogButton> }

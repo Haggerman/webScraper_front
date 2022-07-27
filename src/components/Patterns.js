@@ -1,5 +1,5 @@
 import React  from 'react';
-import { AppBar, Toolbar, Typography, Box, TextField, Button, Paper, Divider } from "@mui/material";
+import { AppBar, Toolbar, Typography, Box, TextField, Button, Paper, Divider, Tooltip } from "@mui/material";
 import Card from '@mui/material/Card';
 import CardHeader from '@mui/material/CardHeader';
 import CardContent from '@mui/material/CardContent';
@@ -55,12 +55,12 @@ const Patterns = ({handleSubmit,handleSetPattern}) => {
         <Card elevation={3}>
             <CardHeader 
             title="Vyhledávácí vzory"
-            action={<CssButton type="submit" onClick={() => handleSubmit(pattern)} ><SendIcon/></CssButton>}
+            action={<Tooltip title="Odeslat vzory"><CssButton type="submit" onClick={() => handleSubmit(pattern)} ><SendIcon/></CssButton></Tooltip>}
             />
             <Divider/>
             <CardContent >      
             <CodeMirror
-              value= {pattern ? pattern : "Add pattern" }
+              value= {pattern ? pattern : "Přidejte vzor" }
               height="100%"
               theme={oneDark}
               firstLineNumber={10}

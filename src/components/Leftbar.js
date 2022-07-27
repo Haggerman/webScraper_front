@@ -6,6 +6,7 @@ import URLList from "./URLList";
 import {styled } from '@mui/material/styles';
 import URLModal from './URLModal';
 import IconButton from '@mui/material/IconButton';
+import Tooltip from '@mui/material/Tooltip';
 
 const CssButton = styled(IconButton)({
   color: "white",
@@ -185,7 +186,7 @@ const Leftbar = ({handleUpdate, handleUpdateURLList, patterns}) => {
                         margin="dense"
                         id="custom-css-outlined-input"
                         label="URL"
-                        type="text"
+                        type="url"
                         size='small'
                         fullWidth
                         InputProps={{ style: { fontSize: 12 } }}
@@ -193,7 +194,13 @@ const Leftbar = ({handleUpdate, handleUpdateURLList, patterns}) => {
                         required value={lastValue} onChange={(e) => setlastValue(e.target.value)}
                         />
                       </Grid>   
-                    <Grid xs={2}><CssButton type="submit" ><SendIcon/></CssButton></Grid>  
+                    <Grid xs={2}>
+                    <Tooltip title="Odeslat adresu">
+                      <CssButton type="submit" >                       
+                        <SendIcon/>
+                      </CssButton>
+                    </Tooltip>
+                    </Grid>  
                 </Grid>      
                 </form>
 

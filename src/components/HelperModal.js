@@ -1,8 +1,6 @@
 import * as React from 'react';
-import Button from '@mui/material/Button';
 import Dialog, { DialogProps } from '@mui/material/Dialog';
-import DialogActions from '@mui/material/DialogActions';
-import HelpIcon from '@mui/icons-material/Help';
+import Tooltip from '@mui/material/Tooltip';
 import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
@@ -41,9 +39,11 @@ export default function HelperModal() {
 
   return (
     <div>
-      <CssButton variant="outlined" onClick={handleClickOpen}>
-      <QuestionMark/>
-      </CssButton>
+      <Tooltip title="Návod">
+        <CssButton variant="outlined" onClick={handleClickOpen}>
+          <QuestionMark/>
+        </CssButton>
+      </Tooltip>
       <Dialog
         open={open}
         onClose={handleClose}

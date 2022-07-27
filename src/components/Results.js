@@ -1,5 +1,5 @@
 import React  from 'react';
-import { Typography, Card, CardHeader, CardContent, Divider, Button, IconButton } from "@mui/material";
+import { Typography, Card, CardHeader, CardContent, Divider, Button, IconButton, Tooltip } from "@mui/material";
 import styled from "@emotion/styled";
 import { oneDark } from '@codemirror/theme-one-dark';
 import CodeMirror from '@uiw/react-codemirror';
@@ -55,7 +55,13 @@ const Results = ({results, jsonResults, error}) => {
             <Card elevation={3}>
                 <CardHeader title="Výsledky" 
                 action={!error && results &&
-                <CssButton className='download' {...csvReport}><CSVLink className='download' {...csvReport}><DownloadIcon/></CSVLink></CssButton>
+                <Tooltip title="Exportovat výsledky">  
+                    <CssButton className='download' {...csvReport}>
+                        <CSVLink className='download' {...csvReport}>
+                            <DownloadIcon/>
+                        </CSVLink>
+                    </CssButton>
+                </Tooltip>   
                  } />
                 <Divider/>
                 <CardContent>
