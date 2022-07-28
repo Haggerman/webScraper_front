@@ -97,7 +97,7 @@ body{
 .css-j7o63n{
  text-align: center;
 }
-.css-62e83j{
-  width: 25px;
-  height: 25px;
+.MuiCircularProgress-root{
+  width: 22px !important;
+  height: 22px !important;
 }

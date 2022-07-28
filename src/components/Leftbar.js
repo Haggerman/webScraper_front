@@ -200,7 +200,6 @@ const Leftbar = ({handleUpdate, handleUpdateURLList, patterns}) => {
                     <Tooltip title="Odeslat adresu">
                       <CssButton type="submit" disabled={loading}>                       
                         {loading ? <CircularProgress color="inherit"/>: <SendIcon/>} 
-                        <CircularProgress color="inherit"/>
                       </CssButton>
                     </Tooltip>
                     </Grid>  
