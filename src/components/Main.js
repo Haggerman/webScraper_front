@@ -12,6 +12,8 @@ const Main = ({HTMLresponse, listURLs, handleSetPatterns}) => {
   const [jsonResults, setJsonResults]= useState("")
   const [pattern, setPattern] = useState("");
   const [error, setError] = useState(false)
+  const [loading, setLoading] = useState(false)
+
   const handleUpdate = (results) => {
     setError(false)
     setResults(results)
@@ -61,8 +63,9 @@ const Main = ({HTMLresponse, listURLs, handleSetPatterns}) => {
   }
 
   const handleSubmit = () => {
+    setLoading(true)
     fetch("/parser", {
-        method: 'PUT',
+        method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
@@ -76,6 +79,7 @@ const Main = ({HTMLresponse, listURLs, handleSetPatterns}) => {
       })
       .then(data => {
         handleUpdate(data);
+        setLoading(false)
       })
       .catch(err => {
 
@@ -85,7 +89,7 @@ const Main = ({HTMLresponse, listURLs, handleSetPatterns}) => {
     return (
         <Grid container spacing={2}>
         <Grid item xs={12} md={12} sx={{height: '700'}}>
-        <Patterns handleSubmit={handleSubmit} handleSetPattern={handleSetPattern}/>
+        <Patterns handleSubmit={handleSubmit} handleSetPattern={handleSetPattern} loading={loading}/>
         </Grid>  
         <Grid item xs={12} md={6}>
         <Structure HTMLresponse={HTMLresponse}/>

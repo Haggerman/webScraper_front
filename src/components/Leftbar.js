@@ -1,5 +1,5 @@
 import React  from 'react';
-import {Grid, Card, CardHeader, CardContent, Divider, TextField } from "@mui/material";
+import {Grid, Card, CardHeader, CardContent, Divider, TextField, CircularProgress } from "@mui/material";
 import SendIcon from '@mui/icons-material/Send';
 import { useState, useEffect } from "react";
 import URLList from "./URLList";
@@ -55,6 +55,7 @@ const Leftbar = ({handleUpdate, handleUpdateURLList, patterns}) => {
     const [lastId, setId] = useState(0);
     const [htmlList, setHtmlList] = useState([]);
     const [pickedUrl, setPickedUrl] = useState(0);
+    const [loading, setLoading] = useState(false);
 
 
     useEffect(() => {
@@ -126,10 +127,11 @@ const Leftbar = ({handleUpdate, handleUpdateURLList, patterns}) => {
     }
 
     const handleSubmit = (e) => {
-        let newId = lastId*1 + 1
+        let newId = lastId*1 + 1;
         e.preventDefault();
+        setLoading(true);
         fetch("/url", {
-            method: 'PUT',
+            method: 'POST',
             credentials: 'include',
             headers: {
               'Content-Type': 'application/json',
@@ -152,9 +154,9 @@ const Leftbar = ({handleUpdate, handleUpdateURLList, patterns}) => {
             setId(newId)
             setPickedUrl(newId)
             handleUpdate(reducedHtmlList)
+            setLoading(false)
           })
           .catch(err => {
-            console.log(err)
     
           })
         }
@@ -196,8 +198,9 @@ const Leftbar = ({handleUpdate, handleUpdateURLList, patterns}) => {
                       </Grid>   
                     <Grid xs={2}>
                     <Tooltip title="Odeslat adresu">
-                      <CssButton type="submit" >                       
-                        <SendIcon/>
+                      <CssButton type="submit" disabled={loading}>                       
+                        {loading ? <CircularProgress color="inherit"/>: <SendIcon/>} 
+                        <CircularProgress color="inherit"/>
                       </CssButton>
                     </Tooltip>
                     </Grid>  

@@ -89,7 +89,7 @@ export default function FormDialog() {
 
   const handleSubmit = () => {
     fetch("/addProxy", {
-        method: 'PUT',
+        method: 'POST',
         credentials: 'include',
         headers: {
           'Content-Type': 'application/json',

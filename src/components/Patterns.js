@@ -1,5 +1,5 @@
 import React  from 'react';
-import { AppBar, Toolbar, Typography, Box, TextField, Button, Paper, Divider, Tooltip } from "@mui/material";
+import {  Divider, Tooltip, CircularProgress } from "@mui/material";
 import Card from '@mui/material/Card';
 import CardHeader from '@mui/material/CardHeader';
 import CardContent from '@mui/material/CardContent';
@@ -25,7 +25,7 @@ const CssButton = styled(IconButton)({
 });
 
 
-const Patterns = ({handleSubmit,handleSetPattern}) => {
+const Patterns = ({handleSubmit,handleSetPattern, loading}) => {
     const [pattern, setPattern] = useState("");
 
     useEffect(() => {
@@ -55,7 +55,7 @@ const Patterns = ({handleSubmit,handleSetPattern}) => {
         <Card elevation={3}>
             <CardHeader 
             title="Vyhledávácí vzory"
-            action={<Tooltip title="Odeslat vzory"><CssButton type="submit" onClick={() => handleSubmit(pattern)} ><SendIcon/></CssButton></Tooltip>}
+            action={<Tooltip title="Odeslat vzory"><CssButton type="submit" onClick={() => handleSubmit(pattern) } disabled={loading} > {loading ? <CircularProgress color="inherit"/>: <SendIcon/>} </CssButton></Tooltip>}
             />
             <Divider/>
             <CardContent >      

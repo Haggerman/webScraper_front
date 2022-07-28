@@ -10,6 +10,12 @@ import CsvUpload from './CsvUpload';
 import {styled } from '@mui/material/styles';
 import IconButton from '@mui/material/IconButton';
 import { Tooltip } from '@mui/material';
+import Radio from '@mui/material/Radio';
+import RadioGroup from '@mui/material/RadioGroup';
+import FormControlLabel from '@mui/material/FormControlLabel';
+import FormControl from '@mui/material/FormControl';
+import FormLabel from '@mui/material/FormLabel';
+import { DataArray } from '@mui/icons-material';
 
 
 
@@ -69,10 +75,12 @@ const CssButton = styled(IconButton)({
 
 
 export default function URLModal() {
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = useState(false);
   const [mail, setMail] = useState("");
   const [file, setFile] = useState();
   const [uploadStatus, setUploadStatus] = useState("");
+  const [type, setType] = useState('CSV');
+  const [mailHelper, setMailHelper]= useState("");
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -83,20 +91,42 @@ export default function URLModal() {
     setOpen(false);
     setFile("");
     setMail("");
+    setType("CSV");
+    setMailHelper("");
   };
 
   const handleFile = (file) =>{
+    var regex = new RegExp("(.*?)\.(csv)$");
+    if (!(regex.test(file.name.toLowerCase()))) {
+      setUploadStatus("Vyberte soubor formátu .csv")
+    }
+    else{
       setFile(file)
-      console.log(file)
-      console.log(mail)
+      setUploadStatus("")
+    }
   }
+
+  function isValidEmail(email) {
+    return /\S+@\S+\.\S+/.test(email);
+  }
+
+  const handleChange = event => {
+    if (!isValidEmail(event.target.value)) {
+      setUploadStatus('Zadejte email ve validním formátu');
+      setMail("")
+    } else {
+      setUploadStatus("");
+      setMail(event.target.value);
+    }
+    setMailHelper(event.target.value)
+  };
 
   const handleSubmit = () => {
 
     var data = new FormData()
     data.append('file', file)
     data.append('mail', mail)
-    setUploadStatus("Data jsou zpracovávána, výsledky dorazí na zadaný mail v následujících minutách")
+    data.append('type', type)
 
     fetch("/uploadFile", {
         method: 'POST',
@@ -111,6 +141,7 @@ export default function URLModal() {
         return res.json();
       })
       .then(data => {
+        setUploadStatus("Data jsou zpracovávána, výsledky dorazí na zadaný mail v následujících minutách")
       })
       .catch(err => {
       })
@@ -128,7 +159,18 @@ export default function URLModal() {
         {mail && file &&  <DialogButton type="submit" className='dialogButton' onClick={() => handleSubmit()}><SendIcon/></DialogButton> }
         </DialogTitle>
         <DialogContent>
-          <CssTextField
+          <FormLabel id="demo-controlled-radio-buttons-group">Typ exportu</FormLabel>
+          <RadioGroup
+        aria-labelledby="demo-controlled-radio-buttons-group"
+        name="controlled-radio-buttons-group"
+        value={type}
+        onChange={(e) => setType(e.target.value)}
+      >
+        <FormControlLabel value="CSV" control={<Radio />} label="CSV" />
+        <FormControlLabel value="JSON" control={<Radio />} label="JSON" />
+      </RadioGroup>
+      <CsvUpload handleFile={handleFile} />
+      <CssTextField
            className='blackInput'
             autoFocus
             margin="dense"
@@ -138,9 +180,9 @@ export default function URLModal() {
             fullWidth
             variant="standard"
             helperText={uploadStatus}
-            required value={mail} onChange={(e) => setMail(e.target.value)}
+            required value={mailHelper} 
+            onChange={handleChange}
           />
-          <CsvUpload handleFile={handleFile}/>
         </DialogContent>
       </Dialog>
     </div>
