@@ -170,7 +170,7 @@ export default function FormDialog() {
             id="name"
             label="Zadejte proxy adresu včetně protokolu (https/https)"
             type="url"
-          
+            helperText="Nezapomeťe seznam odeslat!"
             fullWidth
             variant="standard"
             required value={value} onChange={(e) => setValue(e.target.value)}
