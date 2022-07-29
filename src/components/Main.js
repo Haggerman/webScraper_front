@@ -16,6 +16,7 @@ const Main = ({HTMLresponse, listURLs, handleSetPatterns}) => {
 
   const handleUpdate = (results) => {
     setError(false)
+    console.log(results)
     setResults(results)
     handleSetPatterns(results)
     if(results){
@@ -48,7 +49,10 @@ const Main = ({HTMLresponse, listURLs, handleSetPatterns}) => {
   }
   useEffect(() => { 
     if(results && HTMLresponse[0] && results.length > 0 ){
-    handleSubmit()
+    var exists = results.some(r => r.id == HTMLresponse[0].id )
+    if(!exists){
+      handleSubmit()
+    }
     const pickedResults = results.filter(r => r.id == HTMLresponse[0].id);
     setPickedResults(pickedResults)
     }
@@ -78,8 +82,9 @@ const Main = ({HTMLresponse, listURLs, handleSetPatterns}) => {
         return res.json();
       })
       .then(data => {
-        handleUpdate(data);
         setLoading(false)
+        handleUpdate(data);
+        console.log(data)
       })
       .catch(err => {
 

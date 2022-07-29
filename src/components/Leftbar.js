@@ -56,10 +56,11 @@ const Leftbar = ({handleUpdate, handleUpdateURLList, patterns}) => {
     const [htmlList, setHtmlList] = useState([]);
     const [pickedUrl, setPickedUrl] = useState(0);
     const [loading, setLoading] = useState(false);
+    const [errorText, setError]= useState("");
 
 
     useEffect(() => {
-        fetch("/getURLs", {
+        fetch("/url", {
           method: 'GET',
           credentials: 'include',
           headers: {
@@ -97,7 +98,7 @@ const Leftbar = ({handleUpdate, handleUpdateURLList, patterns}) => {
     }, [])
 
     const handleDelete = (id) =>{
-      fetch("/deleteUrl", {
+      fetch("/url", {
         method: 'DELETE',
         credentials: 'include',
         headers: {
@@ -112,6 +113,7 @@ const Leftbar = ({handleUpdate, handleUpdateURLList, patterns}) => {
         return res.json();
       })
       .then(data => {
+        console.log("smazano")
         const reducedList = listURLs.filter(url => url.id != id);
         setURLs(reducedList);     
         handleUpdateURLList(reducedList)   
@@ -122,13 +124,12 @@ const Leftbar = ({handleUpdate, handleUpdateURLList, patterns}) => {
       .catch(err => {
 
       })
-
-
     }
 
     const handleSubmit = (e) => {
         let newId = lastId*1 + 1;
         e.preventDefault();
+        setError("")
         setLoading(true);
         fetch("/url", {
             method: 'POST',
@@ -157,7 +158,8 @@ const Leftbar = ({handleUpdate, handleUpdateURLList, patterns}) => {
             setLoading(false)
           })
           .catch(err => {
-    
+            setLoading(false)
+            setError("Adresa je nedostupná")
           })
         }
         
@@ -190,10 +192,14 @@ const Leftbar = ({handleUpdate, handleUpdateURLList, patterns}) => {
                         label="URL"
                         type="url"
                         size='small'
+                        disabled={loading}
                         fullWidth
                         InputProps={{ style: { fontSize: 12 } }}
                         variant="standard"
-                        required value={lastValue} onChange={(e) => setlastValue(e.target.value)}
+                        helperText={errorText}
+                        FormHelperTextProps={{ sx:{color: "white"}}}
+                        required value={lastValue}
+                        onChange={(e) => { setlastValue(e.target.value); setError("")}}
                         />
                       </Grid>   
                     <Grid xs={2}>

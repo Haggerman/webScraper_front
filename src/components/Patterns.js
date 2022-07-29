@@ -55,12 +55,12 @@ const Patterns = ({handleSubmit,handleSetPattern, loading}) => {
         <Card elevation={3}>
             <CardHeader 
             title="Vyhledávácí vzory"
-            action={<Tooltip title="Odeslat vzory"><CssButton type="submit" onClick={() => handleSubmit(pattern) } disabled={loading} > {loading ? <CircularProgress color="inherit"/>: <SendIcon/>} </CssButton></Tooltip>}
+            action= {pattern.includes("select:")>0?<Tooltip title="Odeslat vzory"><CssButton type="submit" onClick={() => handleSubmit(pattern) } disabled={loading} > {loading ? <CircularProgress color="inherit"/>: <SendIcon/>} </CssButton></Tooltip>: ""}
             />
             <Divider/>
             <CardContent >      
             <CodeMirror
-              value= {pattern ? pattern : "Přidejte vzor" }
+              value= {pattern}
               height="100%"
               theme={oneDark}
               firstLineNumber={10}

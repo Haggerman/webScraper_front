@@ -8,7 +8,7 @@ import SendIcon from '@mui/icons-material/Send';
 import VpnKeyIcon from '@mui/icons-material/VpnKey';
 import DialogTitle from '@mui/material/DialogTitle';
 import IconButton from '@mui/material/IconButton';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import ProxyList from './ProxyList';
 import {styled } from '@mui/material/styles';
 
@@ -74,11 +74,18 @@ export default function FormDialog() {
 
   const handleAdd = (e) => {
     e.preventDefault();
+    var exists = false
     if(value){
-    setId(lastId+1)
-    proxyList.push({url: value, id: lastId})
-    console.log(proxyList)
-    setProxyList(proxyList)
+      if(proxyList.length>0)
+      {
+      exists = proxyList.some(r => r.url == value)
+      }
+      if(!exists){
+        setId(lastId+1)
+        var newList = []
+        newList.push({url: value, id: lastId})
+        setProxyList(newList)
+      }
     }
   }
 
@@ -86,9 +93,31 @@ export default function FormDialog() {
     const reducedList = proxyList.filter(proxy => proxy.id != id);
     setProxyList(reducedList)
   }
+  useEffect(() => {
+    fetch("/proxy", {
+      method: 'GET',
+      credentials: 'include',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    })
+    .then(res => {
+      if (!res.ok) { // error coming back from server
+        throw Error('could not fetch the data for that resource');
+      } 
+      return res.json();
+    })
+    .then(data => {
+      console.log(data)
+      setProxyList(data)
+
+      })
+    .catch(err => {
+    })
+}, [open])
 
   const handleSubmit = () => {
-    fetch("/addProxy", {
+    fetch("/proxy", {
         method: 'POST',
         credentials: 'include',
         headers: {
@@ -117,6 +146,7 @@ export default function FormDialog() {
 
   const handleClose = () => {
     setOpen(false);
+    setValue("");
   };
 
   return (
@@ -138,8 +168,9 @@ export default function FormDialog() {
             autoFocus
             margin="dense"
             id="name"
-            label="Proxy"
-            type="text"
+            label="Zadejte proxy adresu včetně protokolu (https/https)"
+            type="url"
+          
             fullWidth
             variant="standard"
             required value={value} onChange={(e) => setValue(e.target.value)}
