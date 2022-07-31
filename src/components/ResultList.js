@@ -1,7 +1,5 @@
 import React  from 'react';
-import { RestoreTwoTone } from "@mui/icons-material";
 import {Box } from "@mui/material";
-import { useEffect, useState } from "react";
 
 
 const ResultList = ({results}) => {

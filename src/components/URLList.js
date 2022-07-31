@@ -1,5 +1,5 @@
 import React  from 'react';
-import {Grid, Typography, Box, Button } from "@mui/material";
+import {Grid, Box, Button } from "@mui/material";
 import DeleteForever from '@mui/icons-material/DeleteForever';
 import "../index.css";
 import {styled } from '@mui/material/styles';

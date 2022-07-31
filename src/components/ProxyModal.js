@@ -108,7 +108,6 @@ export default function FormDialog() {
       return res.json();
     })
     .then(data => {
-      console.log(data)
       setProxyList(data)
 
       })
@@ -132,10 +131,8 @@ export default function FormDialog() {
         return res.json();
       })
       .then(data => {
-        console.log(data)
       })
       .catch(err => {
-        console.log(err)
 
       })
     }

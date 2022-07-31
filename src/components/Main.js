@@ -16,7 +16,6 @@ const Main = ({HTMLresponse, listURLs, handleSetPatterns}) => {
 
   const handleUpdate = (results) => {
     setError(false)
-    console.log(results)
     setResults(results)
     handleSetPatterns(results)
     if(results){
@@ -63,7 +62,6 @@ const Main = ({HTMLresponse, listURLs, handleSetPatterns}) => {
 
   const handleSetPattern = (pattern) =>{
     setPattern(pattern)
-    console.log(pattern)
   }
 
   const handleSubmit = () => {
@@ -84,7 +82,6 @@ const Main = ({HTMLresponse, listURLs, handleSetPatterns}) => {
       .then(data => {
         setLoading(false)
         handleUpdate(data);
-        console.log(data)
       })
       .catch(err => {
 

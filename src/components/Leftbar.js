@@ -74,7 +74,6 @@ const Leftbar = ({handleUpdate, handleUpdateURLList, patterns}) => {
           return res.json();
         })
         .then(data => {
-          console.log(data)
           if(data){
             var sessionUrls = []
             var sessionHTMLs = []
@@ -90,7 +89,6 @@ const Leftbar = ({handleUpdate, handleUpdateURLList, patterns}) => {
           handleUpdateURLList(sessionUrls)
           setPickedUrl(highestInt)
           handlePickFromSession(highestInt, sessionHTMLs)
-          console.log(sessionUrls)
           }
         })
         .catch(err => {
@@ -113,7 +111,6 @@ const Leftbar = ({handleUpdate, handleUpdateURLList, patterns}) => {
         return res.json();
       })
       .then(data => {
-        console.log("smazano")
         const reducedList = listURLs.filter(url => url.id != id);
         setURLs(reducedList);     
         handleUpdateURLList(reducedList)   
