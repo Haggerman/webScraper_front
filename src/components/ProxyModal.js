@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {Grid, Tooltip} from "@mui/material";
+import {Grid, Tooltip, CircularProgress} from "@mui/material";
 import TextField from '@mui/material/TextField';
 import Dialog from '@mui/material/Dialog';
 import DialogContent from '@mui/material/DialogContent';
@@ -71,21 +71,32 @@ export default function FormDialog() {
   const [proxyList, setProxyList] = useState([]);
   const [lastId, setId] = useState(1);
   const [value, setValue]= useState('');
+  const [pass, setPass]= useState('');
+  const [user, setUser]= useState('');
+  const [error, setError]= useState("Nezapomeňte seznam odeslat!");
+  const [loading, setLoading] = useState(false);
+  const [proxyLoading, setProxyLoading]= useState(false);
 
   const handleAdd = (e) => {
     e.preventDefault();
     var exists = false
-    if(value){
-      if(proxyList.length>0)
-      {
-      exists = proxyList.some(r => r.url == value)
+    if((value.startsWith("http://"))||(value.startsWith("https://")) ){
+      setError("Nezapomeňte seznam odeslat!")
+      if(value){
+        if(proxyList.length>0)
+        {
+        exists = proxyList.some(r => r.url == value)
+        }
+        if(!exists){
+          checkProxy()
+        }
+        else{
+          setError("Adresa je již v seznamu")
+        }
       }
-      if(!exists){
-        setId(lastId+1)
-        var newList = []
-        newList.push({url: value, id: lastId})
-        setProxyList(newList)
-      }
+    }
+    else{
+      setError("Protokol nebyl zadán")
     }
   }
 
@@ -108,14 +119,16 @@ export default function FormDialog() {
       return res.json();
     })
     .then(data => {
-      setProxyList(data)
-
+      if(data.length>0){
+        setProxyList(data)
+      }
       })
     .catch(err => {
     })
 }, [open])
 
   const handleSubmit = () => {
+    setLoading(true)
     fetch("/proxy", {
         method: 'POST',
         credentials: 'include',
@@ -131,11 +144,40 @@ export default function FormDialog() {
         return res.json();
       })
       .then(data => {
+        setLoading(false)
       })
       .catch(err => {
-
+        setLoading(false)
       })
     }
+  
+    const checkProxy = () => {
+      setProxyLoading(true)
+      fetch("/checkProxy", {
+          method: 'POST',
+          credentials: 'include',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({proxy: {url: value, id: lastId, user: user, pass: pass}})
+        })
+        .then(res => {
+          if (!res.ok) { // error coming back from server
+            throw Error('could not fetch the data for that resource');
+          } 
+          return res.json();
+        })
+        .then(data => {
+          setId(lastId+1)
+          proxyList.push({url: value, id: lastId, user: user, pass: pass})
+          setProxyList(proxyList)
+          setProxyLoading(false)
+        })
+        .catch(err => {
+          setError("Proxy adresa neodpovídá")
+          setProxyLoading(false)
+        })
+      }
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -155,26 +197,54 @@ export default function FormDialog() {
       </Tooltip>
       <Dialog open={open} onClose={handleClose} className='myDialog'>
         <DialogTitle className='dialogTitle'> Proxy list
-        {proxyList && proxyList.length > 0 &&  <DialogButton type="submit" className='dialogButton' onClick={() => handleSubmit()} ><SendIcon/></DialogButton> }
+          <DialogButton type="submit" className='dialogButton' onClick={() => handleSubmit()} disabled={loading} >
+            {loading ? <CircularProgress color="inherit"/>: <SendIcon/>} 
+          </DialogButton>
         </DialogTitle>
         <DialogContent>
         <form onSubmit={handleAdd}>
         <Grid container={true}>
-        <Grid xs={10}>
+        <Grid xs={9}>
           <CssTextField
             autoFocus
             margin="dense"
             id="name"
-            label="Zadejte proxy adresu včetně protokolu (https/https)"
+            label="Adresa včetně protokolu (http/https)"
             type="url"
-            helperText="Nezapomeťe seznam odeslat!"
             fullWidth
             variant="standard"
             required value={value} onChange={(e) => setValue(e.target.value)}
           />
           </Grid>
+          <Grid xs={5}>
+        <CssTextField
+            autoFocus
+            margin="dense"
+            id="username"
+            label="Jméno"
+            helperText={error}
+            type="text"
+            fullWidth
+            variant="standard"
+            value={user} onChange={(e) => setUser(e.target.value)}
+          />
+        </Grid>
+        <Grid xs={5}>
+        <CssTextField
+            autoFocus
+            margin="dense"
+            id="password"
+            label="Heslo"
+            type="password"
+            fullWidth
+            variant="standard"
+            value={pass} onChange={(e) => setPass(e.target.value)}
+          />
+        </Grid>
           <Grid xs={2} className='dialogRow'>
-        <DialogButton type="submit" className='dialogButton' ><AddBoxIcon/></DialogButton>
+        <DialogButton type="submit" className='dialogButton' disabled={proxyLoading} >
+           {proxyLoading ? <CircularProgress color="inherit"/>: <AddBoxIcon/>} 
+        </DialogButton>
         </Grid>
         </Grid>
         </form>
