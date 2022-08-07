@@ -84,7 +84,7 @@ const Main = ({HTMLresponse, listURLs, handleSetPatterns}) => {
         handleUpdate(data);
       })
       .catch(err => {
-
+        setLoading(false)
       })
 }
 
