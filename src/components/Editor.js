@@ -1,8 +1,8 @@
-import React from 'react';
-import { oneDark } from '@codemirror/theme-one-dark';
-import CodeMirror from '@uiw/react-codemirror';
+import React from "react";
+import { oneDark } from "@codemirror/theme-one-dark";
+import CodeMirror from "@uiw/react-codemirror";
 
-export default function Editor({handleChange}) {
+export default function Editor({ handleChange }) {
   return (
     <CodeMirror
       value="Add the patterns here!"
@@ -10,7 +10,7 @@ export default function Editor({handleChange}) {
       theme={oneDark}
       firstLineNumber={10}
       onChange={(value) => {
-        handleChange(value)
+        handleChange(value);
       }}
     />
   );
