@@ -113,3 +113,7 @@ input::-webkit-inner-spin-button {
 input[type=number] {
   -moz-appearance: textfield;
 }
+
+.myMirror .cm-content{
+  white-space: pre-wrap !important;
+}

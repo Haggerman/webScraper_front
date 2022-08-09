@@ -5,7 +5,6 @@ import {
   CardHeader,
   CardContent,
   Divider,
-  Button,
   IconButton,
   Tooltip,
 } from "@mui/material";
@@ -36,6 +35,7 @@ const Results = ({ results, jsonResults, error }) => {
 
   const prettyResults = (results) => {
     const resultsList = Object.create(null);
+    let object = "";
     results.map((r) => (resultsList[r.title] = r.result));
     let finalResults = JSON.stringify(resultsList, null, 2);
     finalResults = finalResults
@@ -47,9 +47,14 @@ const Results = ({ results, jsonResults, error }) => {
       .replace(/\\t/g, "")
       .replace(/\\b/g, "")
       .replace(/\\f/g, "")
+      .replace(/\\/g, "")
       .replace(/\s{2,}/g, " ")
       .trim();
-    const object = JSON.parse(finalResults);
+    try {
+      object = JSON.parse(finalResults);
+    } catch (err) {
+      object = JSON.parse(JSON.stringify("Text obsahuje nepovolené znaky"));
+    }
 
     return JSON.stringify(object, null, 2);
   };
@@ -84,6 +89,7 @@ const Results = ({ results, jsonResults, error }) => {
               height="100%"
               theme={oneDark}
               editable={false}
+              className="myMirror"
             />
           )}
         </Typography>
