@@ -187,7 +187,7 @@ const Leftbar = ({ handleUpdate, handleUpdateURLList, patterns }) => {
       <CardContent>
         <form onSubmit={handleSubmit}>
           <Grid container={true}>
-            <Grid xs={10}>
+            <Grid item xs={10}>
               <CssTextField
                 autoFocus
                 margin="dense"
@@ -209,7 +209,7 @@ const Leftbar = ({ handleUpdate, handleUpdateURLList, patterns }) => {
                 }}
               />
             </Grid>
-            <Grid xs={2}>
+            <Grid item xs={2}>
               <Tooltip title="Odeslat adresu">
                 <CssButton type="submit" disabled={loading}>
                   {loading ? (

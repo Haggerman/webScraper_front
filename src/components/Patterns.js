@@ -80,7 +80,6 @@ const Patterns = ({ handleSubmit, handleSetPattern, loading }) => {
           value={pattern}
           height="100%"
           theme={oneDark}
-          firstLineNumber={10}
           className="myMirror"
           onChange={(value) => {
             setPattern(value);

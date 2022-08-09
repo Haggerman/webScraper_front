@@ -28,7 +28,7 @@ const URLList = ({ URLs, handleDelete, handlePickUrl, pickedURL }) => {
           className={pickedURL == url.id ? "active" : "inactive"}
         >
           <Grid container={true}>
-            <Grid xs={10}>
+            <Grid item xs={10}>
               <Button
                 type="submit"
                 className="myButton"
@@ -37,7 +37,7 @@ const URLList = ({ URLs, handleDelete, handlePickUrl, pickedURL }) => {
                 {url.url}
               </Button>
             </Grid>
-            <Grid xs={2}>
+            <Grid item xs={2}>
               <CssButton type="submit" onClick={() => handleDelete(url.id)}>
                 <DeleteForever />
               </CssButton>

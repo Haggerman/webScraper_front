@@ -212,7 +212,7 @@ export default function FormDialog() {
         <DialogContent>
           <form onSubmit={handleAdd}>
             <Grid container={true}>
-              <Grid xs={9}>
+              <Grid item xs={9}>
                 <CssTextField
                   autoFocus
                   margin="dense"
@@ -226,7 +226,7 @@ export default function FormDialog() {
                   onChange={(e) => setValue(e.target.value)}
                 />
               </Grid>
-              <Grid xs={5}>
+              <Grid item xs={5}>
                 <CssTextField
                   autoFocus
                   margin="dense"
@@ -240,7 +240,7 @@ export default function FormDialog() {
                   onChange={(e) => setUser(e.target.value)}
                 />
               </Grid>
-              <Grid xs={5}>
+              <Grid item xs={5}>
                 <CssTextField
                   autoFocus
                   margin="dense"
@@ -253,7 +253,7 @@ export default function FormDialog() {
                   onChange={(e) => setPass(e.target.value)}
                 />
               </Grid>
-              <Grid xs={2} className="dialogRow">
+              <Grid item xs={2} className="dialogRow">
                 <DialogButton
                   type="submit"
                   className="dialogButton"

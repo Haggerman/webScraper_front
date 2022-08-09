@@ -26,10 +26,10 @@ const URLList = ({ proxyList, handleDelete }) => {
       {proxyList.map((proxy) => (
         <Box key={proxy.id} className="proxyRow">
           <Grid container={true}>
-            <Grid xs={10}>
+            <Grid item xs={10}>
               <Typography> {proxy.url}</Typography>
             </Grid>
-            <Grid xs={2}>
+            <Grid item xs={2}>
               <DialogButton
                 type="submit"
                 className="dialogButton"
