@@ -126,6 +126,7 @@ export default function FormDialog() {
 
   const handleSubmit = () => {
     setLoading(true);
+    setError("Odesílám seznam");
     fetch("/proxy", {
       method: "POST",
       credentials: "include",
@@ -142,15 +143,18 @@ export default function FormDialog() {
         return res.json();
       })
       .then((data) => {
+        setError("Seznam byl odeslán");
         setLoading(false);
       })
       .catch((err) => {
         setLoading(false);
+        setError("Seznam se nepodařilo odeslat");
       });
   };
 
   const checkProxy = () => {
     setProxyLoading(true);
+    setError("Kontrola adresy");
     fetch("/checkProxy", {
       method: "POST",
       credentials: "include",
@@ -187,6 +191,7 @@ export default function FormDialog() {
   const handleClose = () => {
     setOpen(false);
     setValue("");
+    setError("Nezapomeňte seznam odeslat!");
   };
 
   return (
