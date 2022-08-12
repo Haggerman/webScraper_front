@@ -48,7 +48,7 @@ export default function HelperModal() {
         aria-labelledby="scroll-dialog-title"
         aria-describedby="scroll-dialog-description"
       >
-        <DialogTitle id="scroll-dialog-title">Návod použití</DialogTitle>
+        <DialogTitle id="scroll-dialog-title">Návod k použití</DialogTitle>
         <DialogContent>
           <DialogContentText id="scroll-dialog-description" tabIndex={-1}>
             <Typography variant="h7" className="nadpis">
