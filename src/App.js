@@ -33,7 +33,6 @@ function App() {
     })
       .then((res) => {
         if (!res.ok) {
-          // error coming back from server
           throw Error("could not fetch the data for that resource");
         }
         return res.json();
