@@ -92,11 +92,13 @@ export default function URLModal() {
 
   const handleFile = (file) => {
     var regex = new RegExp("(.*?).(csv)$");
-    if (!regex.test(file.name.toLowerCase())) {
-      setUploadStatus("Vyberte soubor formátu .csv");
-    } else {
-      setFile(file);
-      setUploadStatus("");
+    if (file) {
+      if (!regex.test(file.name.toLowerCase())) {
+        setUploadStatus("Vyberte soubor formátu .csv");
+      } else {
+        setFile(file);
+        setUploadStatus("");
+      }
     }
   };
 
